@@ -6,26 +6,30 @@
 #include <string.h>
 
 int
-main(int argc,char *argv[]){
-	size_t i,l1,l2,lmax,lmin;
+main(int argc, char *argv[])
+{
+	size_t i, l1, l2, lmax, lmin;
 
-	if(3!=argc)
+	if (3 != argc) {
 		return 1;
+	}
 
-	l1=strlen(argv[1]);
-	l2=strlen(argv[2]);
-	lmax=(l1>=l2?l1:l2);
-	lmin=(l1<=l2?l1:l2);
+	l1 = strlen(argv[1]);
+	l2 = strlen(argv[2]);
+	lmax = (l1 >= l2 ? l1 : l2);
+	lmin = (l1 <= l2 ? l1 : l2);
 
-	printf("%s\n",argv[1]);
+	printf("%s\n", argv[1]);
 
-	for(i=0;i<lmax;i++)
-		if(i>lmin||argv[1][i]!=argv[2][i])
+	for (i = 0; i < lmax; i++) {
+		if (i > lmin || argv[1][i] != argv[2][i]) {
 			printf("|");
-		else
+		} else {
 			printf(" ");
+		}
+	}
 
-	printf("\n%s\n",argv[2]);
+	printf("\n%s\n", argv[2]);
 
 	return 0;
 }

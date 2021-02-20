@@ -13,43 +13,44 @@ date-time to epoch seconds
 #define STRFTIME_ERROR 0
 
 int
-main(int argc, char *argv[]){
-	if (1 < argc){
-		char *strpret,str[24];
+main(int argc, char *argv[])
+{
+	if (1 < argc) {
+		char *strpret, str[24];
 		size_t strfret;
 		struct tm tm;
 
-		strpret=strptime(argv[1],"%FT%T", &tm);
+		strpret = strptime(argv[1], "%FT%T", &tm);
 
-		if (NULL==strpret){
-			strpret=strptime(argv[1],"%F", &tm);
+		if (NULL == strpret) {
+			strpret = strptime(argv[1], "%F", &tm);
 
-			if (NULL==strpret){
-				fprintf(stderr,"Invalid date provided: %s",argv[1]);
+			if (NULL == strpret) {
+				fprintf(stderr, "Invalid date provided: %s", argv[1]);
 				return -1;
 			}
 		}
 
-		strfret=strftime(str,23,"%s",&tm);
+		strfret = strftime(str, 23, "%s", &tm);
 
-		if(STRFTIME_ERROR==strfret){
-			fprintf(stderr,"Error formatting time for %s",argv[1]);
+		if (STRFTIME_ERROR == strfret) {
+			fprintf(stderr, "Error formatting time for %s", argv[1]);
 			return -1;
 		}
 
-		printf("%s\n",str);
-	}else{
+		printf("%s\n", str);
+	} else {
 		int ret;
 		struct timeval tv;
 
-		ret=gettimeofday(&tv,NULL);
+		ret = gettimeofday(&tv, NULL);
 
-		if(GETTIME_ERROR==ret){
+		if (GETTIME_ERROR == ret) {
 			perror(NULL);
 			return -1;
 		}
 
-		printf("%ld.%06ld\n",tv.tv_sec,tv.tv_usec);
+		printf("%lld.%06ld\n", tv.tv_sec, tv.tv_usec);
 	}
 
 	return 0;
